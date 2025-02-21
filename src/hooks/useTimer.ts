@@ -1,3 +1,5 @@
+// src/hooks/useTimer.ts
+
 import { useState, useEffect, useRef } from "react";
 
 // Define the structure of the timer state.
@@ -34,14 +36,14 @@ export const useTimer = (initialTime: number = 1500) => {
           }
           return { ...prev, timeRemaining: prev.timeRemaining - 1 }; // Decrease time remaining.
         });
-      }, 1000); //by 1 second
+      }, 1000);
     } else {
       clearInterval(intervalRef.current!); // Clear the interval when paused.
       audioRef.current.pause(); // Pause the audio.
       audioRef.current.currentTime = 0; // Reset the audio to the beginning.
     }
 
-    return () => clearInterval(intervalRef.current!); // No memory leaks here
+    return () => clearInterval(intervalRef.current!); // Cleanup function to prevent memory leaks.
   }, [timer.isRunning]);
 
   // Function to toggle between start and pause states.
