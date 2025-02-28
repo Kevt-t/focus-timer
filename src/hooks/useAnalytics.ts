@@ -30,7 +30,7 @@ export const useAnalytics = () => {
     const recordSession = (session: SessionRecord) => {
         setAnalytics((prev) => {
             const isFocusSession = session.type === 'focus';
-            const isValidFocusSession = isFocusSession && session.duration >= 60;
+            const isValidFocusSession = isFocusSession && session.duration >= 20;  // or even 1 if needed
 
             // ⚠️ Streak only resets if this is a break session.
             // ✅ Only increment streak if this is a valid focus session.
